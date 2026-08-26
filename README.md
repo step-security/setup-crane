@@ -41,7 +41,7 @@ By default, `step-security/setup-crane` installs the latest released version of 
 You can select a version with the `version` parameter:
 
 ```yaml
-- uses: step-security/setup-crane@v1
+- uses: step-security/setup-crane@v0
   with:
     version: v0.5.1
 ```
@@ -64,8 +64,3 @@ You can use [encrypted secrets](https://docs.github.com/en/actions/reference/enc
     crane digest my.registry/my/image
 ```
 
-### A note on versioning
-
-The `@v1` in the `uses` statement refers to the version _of the action definition in this repo._
-
-Regardless of what version of the action definition you use, `step-security/setup-crane` will install the latest released version of `crane` unless otherwise specified with `version:`.
