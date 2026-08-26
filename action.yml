@@ -100,6 +100,12 @@ runs:
         cd "${tmp}"
         fname="go-containerregistry_${os}_${arch}.tar.gz"
         curl -o "$fname" -fsSL --retry 5 --retry-delay 1 --retry-all-errors "${url}/${fname}"
+        curl -o checksums.txt -fsSL --retry 5 --retry-delay 1 --retry-all-errors "${url}/checksums.txt"
+        if command -v sha256sum &>/dev/null; then
+          grep "${fname}" checksums.txt | sha256sum --check
+        else
+          grep "${fname}" checksums.txt | shasum -a 256 --check
+        fi
         tar xzf "$fname" "${out}"
         chmod +x "${tmp}/${out}"
         PATH="${PATH}:${tmp}"
